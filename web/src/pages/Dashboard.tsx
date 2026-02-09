@@ -22,7 +22,7 @@ export default function Dashboard() {
       setShowForm(false);
       setName('');
       setDescription('');
-      toast.success('Project created!');
+      toast.success('Project created');
     },
     onError: () => toast.error('Failed to create project'),
   });
@@ -35,11 +35,13 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold">Projects</h2>
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight mb-0">Projects</h2>
+        </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer border-none"
+          className="bg-white hover:bg-[var(--accent-hover)] text-black px-4 py-2 rounded text-xs font-semibold transition-all cursor-pointer border-none uppercase tracking-wider"
         >
           + New Project
         </button>
@@ -48,10 +50,10 @@ export default function Dashboard() {
       {showForm && (
         <form
           onSubmit={handleSubmit}
-          className="bg-[var(--bg-secondary)] border border-[var(--border)] rounded-lg p-4 mb-6"
+          className="bg-[var(--bg-secondary)] border border-[var(--border)] rounded p-5 mb-8"
         >
-          <div className="mb-3">
-            <label className="block text-sm text-[var(--text-secondary)] mb-1">
+          <div className="mb-4">
+            <label className="block text-[10px] text-[var(--text-secondary)] mb-1.5 uppercase tracking-widest font-semibold">
               Project Name
             </label>
             <input
@@ -59,12 +61,12 @@ export default function Dashboard() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="My API Tests"
-              className="w-full bg-[var(--bg-tertiary)] border border-[var(--border)] rounded-md px-3 py-2 text-[var(--text-primary)] text-sm outline-none focus:border-[var(--accent)]"
+              className="w-full bg-[var(--bg-tertiary)] border border-[var(--border)] rounded px-3 py-2.5 text-[var(--text-primary)] text-sm outline-none focus:border-[var(--border-hover)] placeholder:text-[var(--text-tertiary)] transition-colors"
               autoFocus
             />
           </div>
-          <div className="mb-3">
-            <label className="block text-sm text-[var(--text-secondary)] mb-1">
+          <div className="mb-4">
+            <label className="block text-[10px] text-[var(--text-secondary)] mb-1.5 uppercase tracking-widest font-semibold">
               Description
             </label>
             <input
@@ -72,21 +74,21 @@ export default function Dashboard() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Optional description"
-              className="w-full bg-[var(--bg-tertiary)] border border-[var(--border)] rounded-md px-3 py-2 text-[var(--text-primary)] text-sm outline-none focus:border-[var(--accent)]"
+              className="w-full bg-[var(--bg-tertiary)] border border-[var(--border)] rounded px-3 py-2.5 text-[var(--text-primary)] text-sm outline-none focus:border-[var(--border-hover)] placeholder:text-[var(--text-tertiary)] transition-colors"
             />
           </div>
           <div className="flex gap-2">
             <button
               type="submit"
               disabled={mutation.isPending}
-              className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white px-4 py-2 rounded-md text-sm font-medium cursor-pointer border-none transition-colors disabled:opacity-50"
+              className="bg-white hover:bg-[var(--accent-hover)] text-black px-4 py-2 rounded text-xs font-semibold cursor-pointer border-none transition-all disabled:opacity-50 uppercase tracking-wider"
             >
               {mutation.isPending ? 'Creating...' : 'Create'}
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
-              className="bg-[var(--bg-tertiary)] text-[var(--text-secondary)] px-4 py-2 rounded-md text-sm cursor-pointer border border-[var(--border)] transition-colors hover:text-[var(--text-primary)]"
+              className="bg-transparent text-[var(--text-secondary)] px-4 py-2 rounded text-xs cursor-pointer border border-[var(--border)] transition-all hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] uppercase tracking-wider font-semibold"
             >
               Cancel
             </button>
@@ -95,32 +97,39 @@ export default function Dashboard() {
       )}
 
       {isLoading ? (
-        <div className="text-[var(--text-secondary)] text-center py-12">Loading...</div>
+        <div className="text-[var(--text-secondary)] text-center py-20 text-sm">Loading...</div>
       ) : !projects || projects.length === 0 ? (
-        <div className="text-center py-16">
-          <p className="text-5xl mb-4">📁</p>
-          <p className="text-[var(--text-secondary)] text-lg">No projects yet</p>
-          <p className="text-[var(--text-secondary)] text-sm">
+        <div className="text-center py-24 border border-dashed border-[var(--border)] rounded">
+          <div className="w-10 h-10 mx-auto mb-4 border border-[var(--border)] rounded flex items-center justify-center">
+            <span className="text-[var(--text-tertiary)] text-lg">+</span>
+          </div>
+          <p className="text-[var(--text-secondary)] text-sm mb-1">No projects yet</p>
+          <p className="text-[var(--text-tertiary)] text-xs">
             Create a project to start organizing your API tests
           </p>
         </div>
       ) : (
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project: Project) => (
             <Link
               key={project.id}
               to={`/projects/${project.id}`}
-              className="bg-[var(--bg-secondary)] border border-[var(--border)] rounded-lg p-5 no-underline transition-all hover:border-[var(--accent)] hover:shadow-lg hover:shadow-blue-500/10"
+              className="group bg-[var(--bg-secondary)] border border-[var(--border)] rounded p-5 no-underline transition-all hover:border-[var(--border-hover)] hover:bg-[var(--bg-tertiary)]"
             >
-              <h3 className="text-[var(--text-primary)] text-lg font-semibold mb-1">
-                {project.name}
-              </h3>
-              <p className="text-[var(--text-secondary)] text-sm m-0">
+              <div className="flex items-start justify-between mb-3">
+                <h3 className="text-[var(--text-primary)] text-sm font-semibold m-0 tracking-tight">
+                  {project.name}
+                </h3>
+                <span className="text-[var(--text-tertiary)] group-hover:text-[var(--text-secondary)] transition-colors text-xs">→</span>
+              </div>
+              <p className="text-[var(--text-secondary)] text-xs m-0 leading-relaxed">
                 {project.description || 'No description'}
               </p>
-              <p className="text-[var(--text-secondary)] text-xs mt-3 m-0">
-                Created {new Date(project.created_at).toLocaleDateString()}
-              </p>
+              <div className="mt-4 pt-3 border-t border-[var(--border)]">
+                <p className="text-[var(--text-tertiary)] text-[10px] m-0 font-['JetBrains_Mono'] uppercase tracking-wider">
+                  {new Date(project.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                </p>
+              </div>
             </Link>
           ))}
         </div>

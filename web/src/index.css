@@ -1,26 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #171717;
+  --bg-elevated: #1a1a1a;
+  --text-primary: #fafafa;
+  --text-secondary: #737373;
+  --text-tertiary: #525252;
+  --accent: #ffffff;
+  --accent-hover: #e5e5e5;
   --success: #22c55e;
+  --success-muted: rgba(34, 197, 94, 0.12);
   --danger: #ef4444;
-  --warning: #f59e0b;
-  --border: #475569;
+  --danger-muted: rgba(239, 68, 68, 0.12);
+  --warning: #eab308;
+  --warning-muted: rgba(234, 179, 8, 0.12);
+  --border: #262626;
+  --border-hover: #404040;
 }
 
 body {
   margin: 0;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 1px solid #555;
+  outline-offset: 2px;
+}
+
+/* Smooth transitions globally */
+a, button {
+  transition: all 0.15s ease;
 }

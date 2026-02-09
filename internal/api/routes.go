@@ -69,8 +69,8 @@ func SetupRouter(handler *Handler) *gin.Engine {
 			http.FileServer(staticFS).ServeHTTP(c.Writer, c.Request)
 		})
 
-		// Serve other static files (vite.svg, etc.)
-		router.GET("/vite.svg", func(c *gin.Context) {
+		// Serve other static files (probe.svg, etc.)
+		router.GET("/probe.svg", func(c *gin.Context) {
 			http.FileServer(staticFS).ServeHTTP(c.Writer, c.Request)
 		})
 
