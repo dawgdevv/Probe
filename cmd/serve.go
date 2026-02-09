@@ -17,8 +17,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/dawgdevv/apitestercli/internal/api"
-	"github.com/dawgdevv/apitestercli/internal/storage"
+	"github.com/dawgdevv/Probe/internal/api"
+	"github.com/dawgdevv/Probe/internal/storage"
 	"github.com/spf13/cobra"
 )
 

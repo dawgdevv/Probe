@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/dawgdevv/apitestercli/internal/assert"
-	"github.com/dawgdevv/apitestercli/internal/config"
-	"github.com/dawgdevv/apitestercli/pkg/models"
+	"github.com/dawgdevv/Probe/internal/assert"
+	"github.com/dawgdevv/Probe/internal/config"
+	"github.com/dawgdevv/Probe/pkg/models"
 )
 
 type Result struct {

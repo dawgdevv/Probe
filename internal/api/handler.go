@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/dawgdevv/apitestercli/internal/loader"
-	"github.com/dawgdevv/apitestercli/internal/service"
-	"github.com/dawgdevv/apitestercli/internal/storage"
+	"github.com/dawgdevv/Probe/internal/loader"
+	"github.com/dawgdevv/Probe/internal/service"
+	"github.com/dawgdevv/Probe/internal/storage"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/yaml.v3"
 )

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/dawgdevv/apitestercli/internal/executor"
-	"github.com/dawgdevv/apitestercli/pkg/models"
+	"github.com/dawgdevv/Probe/internal/executor"
+	"github.com/dawgdevv/Probe/pkg/models"
 )
 
 // Runner is responsible for executing test suites

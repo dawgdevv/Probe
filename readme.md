@@ -43,7 +43,7 @@
 ### Install
 
 ```bash
-go install github.com/dawgdevv/apitestercli@latest
+go install github.com/dawgdevv/Probe@latest
 ```
 
 This installs the binary as `probe`.
@@ -51,7 +51,7 @@ This installs the binary as `probe`.
 Or build from source:
 
 ```bash
-git clone https://github.com/dawgdevv/apitestercli.git
+git clone https://github.com/dawgdevv/Probe.git
 cd apitestercli
 make build-all
 ```

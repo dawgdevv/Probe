@@ -1,4 +1,4 @@
-module github.com/dawgdevv/apitestercli
+module github.com/dawgdevv/Probe
 
 go 1.25.5
 

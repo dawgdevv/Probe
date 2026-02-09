@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dawgdevv/apitestercli/internal/web"
+	"github.com/dawgdevv/Probe/internal/web"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
