@@ -77,12 +77,15 @@ func RunTest(baseURL string, env map[string]string, test models.TestCase) Result
 	}
 
 	resp, err := client.Do(req)
+	if err != nil {
+		return Result{Name: test.Name, Passed: false, Error: fmt.Errorf("request failed: %w", err)}
+	}
+	defer resp.Body.Close()
+
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return Result{Name: test.Name, Passed: false, Error: err}
 	}
-
-	defer resp.Body.Close()
 
 	if resp.StatusCode != test.Expect.Status {
 		return Result{
