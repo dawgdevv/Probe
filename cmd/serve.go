@@ -2,14 +2,7 @@ package cmd
 
 import (
 	"context"
-	"crypto/rand"
-	"crypto/rsa"
-	"crypto/tls"
-	"crypto/x509"
-	"crypto/x509/pkix"
-	"encoding/pem"
 	"fmt"
-	"math/big"
 	"net/http"
 	"os"
 	"os/signal"
@@ -28,7 +21,7 @@ var (
 )
 
 func init() {
-	serveCmd.Flags().IntVarP(&port, "port", "p", 8443, "Port to run the server on")
+	serveCmd.Flags().IntVarP(&port, "port", "p", 3000, "Port to run the server on")
 	serveCmd.Flags().StringVarP(&dataDir, "data-dir", "d", "", "Directory to store data (default: ~/.probe)")
 	rootCmd.AddCommand(serveCmd)
 }
@@ -36,7 +29,7 @@ func init() {
 var serveCmd = &cobra.Command{
 	Use:   "serve",
 	Short: "Start the Probe web server",
-	Long:  `Starts an HTTPS server with REST API and embedded web UI for managing and running API tests`,
+	Long:  `Starts an HTTP server with REST API and embedded web UI for managing and running API tests`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Set default data directory
 		if dataDir == "" {
@@ -62,20 +55,10 @@ var serveCmd = &cobra.Command{
 		// Setup router
 		router := api.SetupRouter(handler)
 
-		// Generate self-signed certificate
-		cert, err := generateSelfSignedCert()
-		if err != nil {
-			fmt.Println("Error generating certificate:", err)
-			os.Exit(1)
-		}
-
-		// Create HTTPS server
+		// Create HTTP server
 		server := &http.Server{
-			Addr:    fmt.Sprintf(":%d", port),
-			Handler: router,
-			TLSConfig: &tls.Config{
-				Certificates: []tls.Certificate{cert},
-			},
+			Addr:         fmt.Sprintf(":%d", port),
+			Handler:      router,
 			ReadTimeout:  15 * time.Second,
 			WriteTimeout: 15 * time.Second,
 			IdleTimeout:  60 * time.Second,
@@ -83,11 +66,11 @@ var serveCmd = &cobra.Command{
 
 		// Start server in goroutine
 		go func() {
-			fmt.Printf("\n🚀 Probe running on https://localhost:%d\n", port)
+			fmt.Printf("\n🚀 Probe running on http://localhost:%d\n", port)
 			fmt.Printf("📁 Data directory: %s\n", dataDir)
-			fmt.Printf("\n Press Ctrl+C to stop\n\n")
+			fmt.Printf("\n   Press Ctrl+C to stop\n\n")
 
-			if err := server.ListenAndServeTLS("", ""); err != nil && err != http.ErrServerClosed {
+			if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 				fmt.Println("Error starting server:", err)
 				os.Exit(1)
 			}
@@ -110,43 +93,4 @@ var serveCmd = &cobra.Command{
 
 		fmt.Println("✅ Server stopped")
 	},
-}
-
-// generateSelfSignedCert creates a self-signed TLS certificate for HTTPS
-func generateSelfSignedCert() (tls.Certificate, error) {
-	priv, err := rsa.GenerateKey(rand.Reader, 2048)
-	if err != nil {
-		return tls.Certificate{}, err
-	}
-
-	notBefore := time.Now()
-	notAfter := notBefore.Add(365 * 24 * time.Hour) // Valid for 1 year
-
-	serialNumber, err := rand.Int(rand.Reader, new(big.Int).Lsh(big.NewInt(1), 128))
-	if err != nil {
-		return tls.Certificate{}, err
-	}
-
-	template := x509.Certificate{
-		SerialNumber: serialNumber,
-		Subject: pkix.Name{
-			Organization: []string{"Probe"},
-		},
-		NotBefore:             notBefore,
-		NotAfter:              notAfter,
-		KeyUsage:              x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
-		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
-		BasicConstraintsValid: true,
-		DNSNames:              []string{"localhost"},
-	}
-
-	certDER, err := x509.CreateCertificate(rand.Reader, &template, &template, &priv.PublicKey, priv)
-	if err != nil {
-		return tls.Certificate{}, err
-	}
-
-	certPEM := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: certDER})
-	keyPEM := pem.EncodeToMemory(&pem.Block{Type: "RSA PRIVATE KEY", Bytes: x509.MarshalPKCS1PrivateKey(priv)})
-
-	return tls.X509KeyPair(certPEM, keyPEM)
 }

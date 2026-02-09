@@ -106,7 +106,7 @@ Exit code is `1` if any test fails — CI/CD friendly out of the box.
 ### Run from Web
 
 ```bash
-# Start the web server (HTTPS, embedded UI)
+# Start the web server (embedded UI)
 probe serve
 
 # Custom port
@@ -116,7 +116,7 @@ probe serve -p 9000
 probe serve -d /path/to/data
 ```
 
-Open `https://localhost:8443` in your browser to access the dashboard.
+Open `http://localhost:3000` in your browser to access the dashboard.
 
 ---
 

@@ -21,7 +21,7 @@ func SetupRouter(handler *Handler) *gin.Engine {
 	router.Use(gin.Logger())
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"https://localhost:*", "http://localhost:*"},
+		AllowOrigins:     []string{"http://localhost:*"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},

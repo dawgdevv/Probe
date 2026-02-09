@@ -19,7 +19,7 @@ Comprehensive list of implemented and planned features.
 | JSON output formatter | ✅ Done | Structured results |
 | Custom data directory (`--data-dir`) | ✅ Done | Default `~/.probe` |
 | Custom port (`--port`) | ✅ Done | Default 8443 |
-| HTTPS with auto-generated self-signed cert | ✅ Done | TLS out of the box |
+| HTTPS with auto-generated self-signed cert | ❌ Planned | Optional `--tls` flag |
 | Graceful server shutdown | ✅ Done | SIGINT/SIGTERM handling |
 | Color-coded terminal reports | ❌ Planned | — |
 | `--format` flag (json, table, minimal) | ❌ Planned | — |
