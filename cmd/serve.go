@@ -29,13 +29,13 @@ var (
 
 func init() {
 	serveCmd.Flags().IntVarP(&port, "port", "p", 8443, "Port to run the server on")
-	serveCmd.Flags().StringVarP(&dataDir, "data-dir", "d", "", "Directory to store data (default: ~/.apitester)")
+	serveCmd.Flags().StringVarP(&dataDir, "data-dir", "d", "", "Directory to store data (default: ~/.probe)")
 	rootCmd.AddCommand(serveCmd)
 }
 
 var serveCmd = &cobra.Command{
 	Use:   "serve",
-	Short: "Start the API Tester web server",
+	Short: "Start the Probe web server",
 	Long:  `Starts an HTTPS server with REST API and embedded web UI for managing and running API tests`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Set default data directory
@@ -45,7 +45,7 @@ var serveCmd = &cobra.Command{
 				fmt.Println("Error getting home directory:", err)
 				os.Exit(1)
 			}
-			dataDir = filepath.Join(home, ".apitester")
+			dataDir = filepath.Join(home, ".probe")
 		}
 
 		// Initialize storage
@@ -83,7 +83,7 @@ var serveCmd = &cobra.Command{
 
 		// Start server in goroutine
 		go func() {
-			fmt.Printf("\n🚀 API Tester Server running on https://localhost:%d\n", port)
+			fmt.Printf("\n🚀 Probe running on https://localhost:%d\n", port)
 			fmt.Printf("📁 Data directory: %s\n", dataDir)
 			fmt.Printf("\n Press Ctrl+C to stop\n\n")
 
@@ -130,7 +130,7 @@ func generateSelfSignedCert() (tls.Certificate, error) {
 	template := x509.Certificate{
 		SerialNumber: serialNumber,
 		Subject: pkix.Name{
-			Organization: []string{"API Tester CLI"},
+			Organization: []string{"Probe"},
 		},
 		NotBefore:             notBefore,
 		NotAfter:              notAfter,

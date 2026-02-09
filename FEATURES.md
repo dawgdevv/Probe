@@ -17,7 +17,7 @@ Comprehensive list of implemented and planned features.
 | CI-friendly exit codes | ✅ Done | Exit 1 on any failure |
 | Console formatter (✔/✖ output) | ✅ Done | Real-time progress |
 | JSON output formatter | ✅ Done | Structured results |
-| Custom data directory (`--data-dir`) | ✅ Done | Default `~/.apitester` |
+| Custom data directory (`--data-dir`) | ✅ Done | Default `~/.probe` |
 | Custom port (`--port`) | ✅ Done | Default 8443 |
 | HTTPS with auto-generated self-signed cert | ✅ Done | TLS out of the box |
 | Graceful server shutdown | ✅ Done | SIGINT/SIGTERM handling |

@@ -8,9 +8,9 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "apitestercli",
-	Short: "API testing CLI for CI/CD",
-	Long:  "apitester runs api tests defined in YAML files and exits with CI-Friendly status codes.",
+	Use:   "probe",
+	Short: "Fast, lightweight API test runner",
+	Long:  "Probe runs API tests defined in YAML files and exits with CI-friendly status codes.",
 }
 
 func Execute() {

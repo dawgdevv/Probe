@@ -36,17 +36,19 @@ func (h *Handler) Landing(c *gin.Context) {
 	html := `<!DOCTYPE html>
 <html>
 <head>
-    <title>API Tester CLI</title>
+    <title>Probe</title>
     <style>
-        body { font-family: system-ui; max-width: 800px; margin: 50px auto; padding: 20px; }
-        h1 { color: #333; }
-        .endpoint { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
-        code { background: #e0e0e0; padding: 2px 6px; border-radius: 3px; }
+        body { font-family: system-ui; max-width: 800px; margin: 50px auto; padding: 20px; background: #000; color: #fafafa; }
+        h1 { color: #fff; }
+        h2 { color: #999; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+        .endpoint { background: #111; padding: 10px; margin: 10px 0; border-radius: 4px; border: 1px solid #222; }
+        code { background: #1a1a1a; padding: 2px 6px; border-radius: 3px; color: #ccc; }
+        a { color: #999; }
     </style>
 </head>
 <body>
-    <h1>🚀 API Tester CLI Server</h1>
-    <p>Server is running! The web UI will be available here once the frontend is built.</p>
+    <h1>Probe</h1>
+    <p style="color: #888;">Server is running. The web UI will be available here once the frontend is built.</p>
     
     <h2>Available API Endpoints:</h2>
     <div class="endpoint"><strong>GET</strong> <code>/api/health</code> - Server health check</div>

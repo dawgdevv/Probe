@@ -46,6 +46,8 @@
 go install github.com/dawgdevv/apitestercli@latest
 ```
 
+This installs the binary as `probe`.
+
 Or build from source:
 
 ```bash

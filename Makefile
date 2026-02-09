@@ -9,7 +9,7 @@ build-ui:
 
 # Build the Go binary (with embedded UI)
 build-cli: build-ui
-	go build -o apitestercli
+	go build -o probe
 
 # Build everything
 build-all: build-cli
@@ -28,6 +28,6 @@ test:
 
 # Clean build artifacts
 clean:
-	rm -f apitestercli
+	rm -f probe
 	rm -rf web/dist
 	rm -rf internal/web/static
